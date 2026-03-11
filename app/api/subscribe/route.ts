@@ -1,22 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
-
-const DATA_FILE = path.join(process.cwd(), "data", "subscribers.json");
-
-async function readSubscribers(): Promise<string[]> {
-  try {
-    const data = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
-
-async function writeSubscribers(subscribers: string[]): Promise<void> {
-  await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-  await fs.writeFile(DATA_FILE, JSON.stringify(subscribers, null, 2));
-}
+import { getSupabase } from "@/lib/supabase";
 
 export async function POST(request: NextRequest) {
   try {
@@ -38,17 +21,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const subscribers = await readSubscribers();
+    const supabase = getSupabase();
+    const { error } = await supabase
+      .from("newsletter_subscribers")
+      .insert({ email: email.toLowerCase() });
 
-    if (subscribers.includes(email.toLowerCase())) {
+    if (error) {
+      // Unique constraint violation → already subscribed
+      if (error.code === "23505") {
+        return NextResponse.json(
+          { error: "You're already subscribed!" },
+          { status: 409 }
+        );
+      }
+      console.error("Supabase insert error:", error);
       return NextResponse.json(
-        { error: "You're already subscribed!" },
-        { status: 409 }
+        { error: "Something went wrong. Please try again." },
+        { status: 500 }
       );
     }
-
-    subscribers.push(email.toLowerCase());
-    await writeSubscribers(subscribers);
 
     return NextResponse.json(
       { message: "You're in! Welcome to the matcha fam. 🍵" },
