@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  /* Primary Greens */
+  --matcha-primary: #8BA88B;
+  --matcha-deep: #6B8C6B;
+  --matcha-sage: #A8C4A8;
+  --matcha-mint: #DDE8DD;
+  --matcha-vibrant: #7DA07D;
+
+  /* White Neutrals */
+  --matcha-cream: #FFFFFF;
+  --matcha-parchment: #F5F5F5;
+  --matcha-stone: #E8E8E8;
+  --matcha-mist: #F8F8F8;
+
+  /* Warm Accents */
+  --matcha-terracotta: #BC7A63;
+  --matcha-gold: #CCAB63;
+  --matcha-coral: #D8907D;
+
+  /* Text */
+  --matcha-ink: #0E3C30;
+  --matcha-secondary: #225546;
+  --matcha-tertiary: #386C5C;
+
+  /* Other */
+  --matcha-yellow-shadow: #E0D06F;
+  --matcha-accent: #4CAF50;
+
+  /* Semantic tokens */
+  --bg-primary: var(--matcha-cream);
+  --bg-secondary: var(--matcha-parchment);
+  --bg-card: var(--matcha-cream);
+  --bg-mist: var(--matcha-mist);
+  --border-color: var(--matcha-stone);
+  --text-primary: var(--matcha-ink);
+  --text-secondary: var(--matcha-secondary);
+  --text-tertiary: var(--matcha-tertiary);
+}
+
+.dark {
+  --bg-primary: #0A1F1A;
+  --bg-secondary: #0E3C30;
+  --bg-card: #122E27;
+  --bg-mist: #0D2B24;
+  --border-color: #1A4A3D;
+  --text-primary: #DDE8DD;
+  --text-secondary: #A8C4A8;
+  --text-tertiary: #8BA88B;
+}
+
+@theme inline {
+  --color-matcha-primary: var(--matcha-primary);
+  --color-matcha-deep: var(--matcha-deep);
+  --color-matcha-sage: var(--matcha-sage);
+  --color-matcha-mint: var(--matcha-mint);
+  --color-matcha-vibrant: var(--matcha-vibrant);
+  --color-matcha-cream: var(--matcha-cream);
+  --color-matcha-parchment: var(--matcha-parchment);
+  --color-matcha-stone: var(--matcha-stone);
+  --color-matcha-mist: var(--matcha-mist);
+  --color-matcha-terracotta: var(--matcha-terracotta);
+  --color-matcha-gold: var(--matcha-gold);
+  --color-matcha-coral: var(--matcha-coral);
+  --color-matcha-ink: var(--matcha-ink);
+  --color-matcha-secondary-text: var(--matcha-secondary);
+  --color-matcha-tertiary-text: var(--matcha-tertiary);
+  --color-matcha-yellow-shadow: var(--matcha-yellow-shadow);
+  --color-matcha-accent: var(--matcha-accent);
+
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-mist: var(--bg-mist);
+  --color-border: var(--border-color);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--matcha-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--matcha-deep);
+}
